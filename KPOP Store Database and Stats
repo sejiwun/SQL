@@ -1,0 +1,29 @@
+/** Creating my store database**/
+CREATE TABLE kpop_store(id INTEGER PRIMARY KEY,merch TEXT, quantity_available INTEGER, quantity_sold INTEGER, aisle INTEGER, price INTEGER);
+
+INSERT INTO kpop_store VALUES
+(1, "TXT Temptation Album", 10, 2, 1000, 35),
+(2, "BTS Wings Album", 5, 1, 1001, 49),
+(3, "D-Day Tour Picket", 20, 15, 1002, 25),
+(4, "TXT Good Boy Gone Bad Lomo Cards", 3, 0, 1000, 5),
+(5, "D-Day Agust T-Shirt", 15, 10, 1002,50),
+(6, "BTS MOTS7 Album", 10, 3, 1001, 27),
+(7, "BTS LY Her Album", 10, 5, 1001, 28),
+(8, "RM Indigo Album", 3, 1, 1005, 22),
+(9, "RM Indigo Merch", 10, 5, 1005, 52),
+(10, "RM Photofolio", 7, 2, 1005, 48),
+(11, "SUGA Photofolio", 7, 6, 1002, 48),
+(12, "BTS 7 Photofolio", 7, 7, 1001, 48),
+(13, "J-HOPE Photofolio", 7, 4, 1006, 48),
+(14, "V Photofolio", 7, 2, 1007, 48),
+(15, "JITB Vinyl", 5, 2, 1006, 29)
+;
+
+/**display the database ordered by price. **/
+SELECT * FROM kpop_store ORDER BY price;
+
+/**What is the mos expensive item in the store?**/
+SELECT merch, MAX(price) "Most expensive merch price" FROM kpop_store; 
+
+/**What is the expected profit expected from the store?**/
+SELECT aisle, SUM(price) FROM kpop_store GROUP BY aisle;
