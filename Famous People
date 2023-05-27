@@ -1,0 +1,124 @@
+/* Create table about the people and what they do here */
+CREATE TABLE famous_people(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, occupation TEXT);
+INSERT INTO famous_people (name, occupation) VALUES("Tom Hanks","Movie Star"),
+      ("Jennifer Lopez","Singer"),
+      ("J.K Rowling","Author"),
+      ("Harry Potter","Fictional"),
+      ("Leonardo DiCaprio", "Movie Star"),
+      ("Beyonce","Singer"),
+      ("Dan Brown","Author"),
+      ("Luke Skywalker","Fictional"),
+      ("Angelina Jolie","Movie Star"),
+      ("Taylor Swift","Singer");
+--SELECT * FROM famous_people;--
+
+/**Table Movies**/
+CREATE TABLE movies(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, actor_id INTEGER);
+INSERT INTO movies (title, actor_id) VALUES
+("Forest Gump", 1),
+("Cast Away", 1),
+("Maid in Manhattan", 2),
+("Titanic", 5),
+("Inception", 5),
+("Lara Croft:Tomb Raider", 9),
+("Harry Potter and the Philosophers Stone", NULL),
+("Harry Potter and the Chamber of Secrets", NULL),
+("The Da Vinci Code", NULL);
+
+
+/**Table Singer**/
+CREATE TABLE singers (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT,
+  songwriter_id INTEGER,
+  origin TEXT);
+
+INSERT INTO singers (name, songwriter_id, origin) VALUES
+  ('Jennifer Lopez', 2, 'USA'),
+  ('Adele', NULL, 'UK'),
+  ('Beyoncé', 6, 'USA'),
+  ('Taylor Swift', 10, 'USA');
+  
+--SELCET * FROM singers;--
+
+/**Table Songs**/
+CREATE TABLE songs (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  title TEXT,
+  singer_id INTEGER);
+
+INSERT INTO songs (title, singer_id) VALUES
+  ('On the Floor', 1),
+  ('Rolling in the Deep', 2),
+  ('Halo', 3),
+  ('Love Story', 4);
+  
+/**Table Authors**/
+CREATE TABLE authors (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT);
+
+INSERT INTO authors (name) VALUES
+  ('J.K. Rowling'),
+  ('Stephen King'),
+  ('Dan Brown');
+  
+/**Table Books**/
+CREATE TABLE books (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  title TEXT,
+  author_id INTEGER);
+
+INSERT INTO books (title, author_id) VALUES
+  ('Harry Potter and the Philosopher''s Stone', 1),
+  ('Harry Potter and the Chamber of Secrets', 1),
+  ('The Da Vinci Code', 3);
+  
+/**Table Fictional Characters**/
+CREATE TABLE fictionalCharacters (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT,
+  book_id INTEGER,
+  movie_id INTEGER);
+
+
+INSERT INTO fictionalCharacters (name, book_id, movie_id)
+VALUES
+  ('Harry Potter', 1, 7),
+  ('Ron Weasley', 1, 7),
+  ('Hermione Granger', 1,7),
+  ('Robert Langdon', 3,9),
+  ('Sophie Neveu', 3,9),
+  ('Langdon''s Sister', 3,9),
+  ('Luke Skywalker', 8,9);
+  
+  
+
+--actors and movies they were in--
+SELECT fp.name, m.title
+FROM movies m
+INNER JOIN famous_people fp 
+ON m.actor_id = fp.id;
+
+--songs and their singers--
+SELECT sg.name, s.title
+FROM songs s
+INNER JOIN singers sg 
+ON s.singer_id = sg.id;
+
+--books and their writers--
+SELECT a.name, b.title
+FROM books b
+INNER JOIN authors a 
+ON b.author_id = a.id;
+
+--movies and book where fictional characters appeared--
+SELECT fc.name, b.title as book_featured, m.title as movie_featured
+FROM fictionalCharacters fc
+INNER JOIN books b
+ON b.id = fc.book_id
+INNER JOIN movies m
+ON m.id = fc.movie_id; 
+
+
+
