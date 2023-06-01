@@ -3,16 +3,16 @@
 --How many orders were placed in January? 
 /**
 SELECT count(orderID) FROM BIT_DB.JanSales
- WHERE length(orderID) = 6 
-AND orderID <> 'Order ID';
+WHERE orderdate between '02/13/19 00:00' 
+AND '02/18/19 00:00';
 **/
 
 --How many of these orders were for iphones?
 /**
 SELECT count(Product) FROM BIT_DB.JanSales
 WHERE Product LIKE '%Iphone%'
-AND length(orderID) = 6
-AND orderID <> 'Order ID'; 
+AND orderdate between '02/13/19 00:00' 
+AND '02/18/19 00:00'; 
 **/
 
 --Select the customer account numbers for all the orders that were placed in February.
@@ -21,16 +21,16 @@ SELECT cust.acctnum
 FROM BIT_DB.customers cust
 INNER JOIN BIT_DB.FebSales Feb
 ON cust.order_id=FEB.orderid
-WHERE length(orderid) = 6 
-AND orderid <> 'Order ID'
+WHERE orderdate between '02/13/19 00:00' 
+AND '02/18/19 00:00'
 **/
 
 --Which product was the cheapest one sold in January, and what was the price?
 /**
 SELECT Product, MIN(price)
 FROM BIT_DB.JanSales
-WHERE length(orderID) = 6
-AND orderID <> 'Order ID';
+WHERE orderdate between '02/13/19 00:00' 
+AND '02/18/19 00:00';
 **/
 --OR
 /**
@@ -43,8 +43,8 @@ WHERE  price in (SELECT min(price) FROM BIT_DB.JanSales)
 /**
 SELECT Product, SUM(Quantity)*price AS Revenue
 FROM BIT_DB.JanSales
-WHERE length(orderID) = 6
-AND orderID <> 'Order ID' 
+WHERE orderdate between '02/13/19 00:00' 
+AND '02/18/19 00:00' 
 GROUP BY Product; 
 **/
 
@@ -68,6 +68,6 @@ INNER JOIN customers c
 ON f.orderID = c.order_id
 GROUP BY order_id
 HAVING Bought > 2
-AND length(orderid) = 6 
-AND orderid <> 'Order ID'; 
+AND orderdate between '02/13/19 00:00' 
+AND '02/18/19 00:00'; 
 **/
