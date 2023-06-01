@@ -54,7 +54,7 @@ Product,
 SUM(Quantity) AS QuantSold, 
 SUM(Quantity)*price as Revenue
 FROM BIT_DB.FebSales
-WHERE location = '548 Lincoln St, Seattle, WA 98101'
+WHERE location like '%548 Lincoln St%'
 GROUP BY Product; **/
 
 --How many customers ordered more than 2 products at a time in February, and what was the average amount spent for those customers?
