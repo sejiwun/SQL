@@ -1,0 +1,64 @@
+/* What does the app's SQL look like? */
+CREATE TABLE HighScores (
+id INTEGER PRIMARY KEY,
+player_name TEXT,
+score INTEGER,
+date_played TEXT
+);
+
+-- Insert example rows
+INSERT INTO HighScores (player_name, score, date_played) VALUES
+('John', 5000, '2023-06-10'),
+('Sarah', 7000, '2023-06-12'),
+('Michael', 6000, '2023-06-15');
+
+-- Update Sarah's score to 8000
+UPDATE HighScores
+SET score = 8000
+WHERE player_name = 'Sarah';
+
+-- Print the updated high scores
+SELECT * FROM HighScores;
+
+-- Delete Michael's score
+DELETE FROM HighScores
+WHERE player_name = 'Michael';
+
+-- Print the high scores after the deletion
+SELECT * FROM HighScores;
+
+-- Insert a new high score
+INSERT INTO HighScores (player_name, score, date_played) VALUES
+('Emma', 9000, '2023-06-16');
+
+-- Print the high scores after the insertion
+SELECT * FROM HighScores;
+
+
+-- Retrieve the top 3 high scores
+SELECT player_name, score
+FROM HighScores
+ORDER BY score DESC
+LIMIT 3;
+
+-- Count the number of high scores
+SELECT COUNT(*) AS total_high_scores FROM HighScores;
+
+-- Delete all high scores with a score lower than 6000
+DELETE FROM HighScores
+WHERE score < 6000;
+
+-- Print the high scores after the deletion
+SELECT * FROM HighScores;
+
+-- Add a new column to store the game level
+ALTER TABLE HighScores
+ADD COLUMN game_level TEXT default 'Unknown';
+
+-- Update the game level for existing high scores
+UPDATE HighScores
+SET game_level = 'Expert'
+WHERE score >= 8000;
+
+-- Print the high scores with the new column
+SELECT * FROM HighScores;
